@@ -27,7 +27,7 @@ function Numpad() {
 				resetDisplay();
 				break;
 			default:
-				if (result.length != 22) {
+				if (result.length < 20) {
 					setStateResult(value);
 					setStateOutput(value);
 				}
@@ -36,7 +36,7 @@ function Numpad() {
 	};
 
 	const deleteOneNumber = () => {
-		if (result.length == 1) {
+		if (result.length === 1) {
 			setResult('0');
 			deleteLastString(setOutput);
 		} else {
@@ -64,7 +64,7 @@ function Numpad() {
 
 	const calculateNumbers = (percent) => {
 		if (output !== '' && output[output.length - 1].match(/\d/gm)) {
-			const numbersRaw = output.split(/[=+x\/-]/gm);
+			const numbersRaw = output.split(/[=+x/-]/gm);
 			const operationsRaw = output.split(/[\d=.]/gm);
 
 			const numbers = deleteNullArray(numbersRaw);
@@ -75,7 +75,7 @@ function Numpad() {
 				operations.shift();
 			}
 
-			while (numbers.length != 1) {
+			while (numbers.length !== 1) {
 				let index = findIndexOfOperation(operations);
 				const numberA = parseFloat(numbers[index]);
 				const numberB = parseFloat(numbers[index + 1]);
@@ -85,16 +85,16 @@ function Numpad() {
 				numbers.splice(index + 1, 1);
 				operations.splice(index, 1);
 			}
-			if (percent) setResult('=' + numbers[0] / 100);
-			else setResult('=' + numbers[0]);
+			if (percent) setResult('=' + parseFloat(numbers[0]) / 100);
+			else setResult('=' + parseFloat(numbers[0]));
 		} else setResult('=0');
 	};
 
 	const findIndexOfOperation = (operations) => {
 		let index = operations.findIndex((operation) => operation[0] === 'x'); // find index x in operation
 
-		if (index == -1) index = operations.findIndex((item) => item[0] === '/'); // find index / in operation
-		if (index == -1) index = 0; //if not have x and / then reset index = 0
+		if (index === -1) index = operations.findIndex((item) => item[0] === '/'); // find index / in operation
+		if (index === -1) index = 0; //if not have x and / then reset index = 0
 		return index;
 	};
 
@@ -124,6 +124,8 @@ function Numpad() {
 				return numberA * numberB;
 			case '/':
 				return numberA / numberB;
+			default:
+				console.error("NOT A OPERATION");
 		}
 	};
 
@@ -147,6 +149,11 @@ function Numpad() {
 		return preVal[len - 1] === '-' && preVal[len - 2] === '-' && value === '-';
 	};
 
+	const isDot = (preVal, value) => {
+		const len = preVal.length;
+		return preVal[len - 1] === '.' && value === '-';
+	};
+
 	const setStateOutput = (value) => {
 		const regex = /[\d-]/g;
 		setOutput((preVal) => {
@@ -155,10 +162,10 @@ function Numpad() {
 			if (preItem === undefined) return changeOperation(preVal, value);
 
 			if (value.match(regex)) {
-				if (isDoubleSubtract(preVal, value)) return preVal;
+				if (isDoubleSubtract(preVal, value) || isDot(preVal, value)) return preVal;
 				return preVal + value;
 			} else
-				return preItem.match(/[%.+x\/-]/gm)
+				return preItem.match(/[%.+x/-]/gm)
 					? changeOperation(preVal, value) //if preItem is a operation then not change output
 					: preVal + value; // if preItem and value is a operation then change last item output
 		});
@@ -169,8 +176,9 @@ function Numpad() {
 
 		if (value.match(regex)) {
 			setResult((preVal) => {
+				const numPreVal = parseInt(preVal);
 				//set first number
-				if (preVal == 0) return value;
+				if (numPreVal === 0) return value;
 				else return preVal.match(regex) ? preVal + value : value;
 			});
 		} else setResult(value);
