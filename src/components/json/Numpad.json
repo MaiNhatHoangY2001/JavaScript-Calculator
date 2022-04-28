@@ -1,0 +1,84 @@
+[
+    {
+        "id": "double-zero",
+        "value": "00"
+    },
+    {
+        "id": "zero",
+        "value": "0"
+    },
+    {
+        "id": "decimal",
+        "value": "."
+    },
+    {
+        "id": "equals",
+        "value": "="
+    },
+    {
+        "id": "one",
+        "value": "1"
+    },
+    {
+        "id": "two",
+        "value": "2"
+    },
+    {
+        "id": "three",
+        "value": "3"
+    },
+    {
+        "id": "add",
+        "value": "+"
+    },
+    {
+        "id": "four",
+        "value": "4"
+    },
+    {
+        "id": "five",
+        "value": "5"
+    },
+    {
+        "id": "six",
+        "value": "6"
+    },
+    {
+        "id": "subtract",
+        "value": "-"
+    },
+    {
+        "id": "seven",
+        "value": "7"
+    },
+    {
+        "id": "eight",
+        "value": "8"
+    },
+    {
+        "id": "nine",
+        "value": "9"
+    },
+    {
+        "id": "multiply",
+        "value": "x"
+    },
+    
+    {
+        "id": "ac",
+        "value": "AC"
+    },
+    
+    {
+        "id": "percent",
+        "value": "%"
+    },
+    {
+        "id": "back",
+        "value": "<"
+    },
+    {
+        "id": "divide",
+        "value": "/"
+    }
+]

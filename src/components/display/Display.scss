@@ -1,0 +1,11 @@
+.display{
+    padding: 0.8rem;
+    text-align: right;
+    padding-bottom: 0;
+    .output{
+        margin-bottom: 0.5rem;
+        opacity: 0.6;
+        min-height: 24px;
+        overflow-wrap: break-word;
+    }
+}

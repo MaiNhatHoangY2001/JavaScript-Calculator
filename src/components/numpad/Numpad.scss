@@ -1,0 +1,42 @@
+
+@mixin noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+} 
+
+.numpad{
+    padding: 0.5rem;
+    font-size: 1.8rem;
+    .pad{
+        background-color: #070707;
+        border: 1px solid #212223;
+        cursor: pointer;
+        border-radius: 5px;
+        @include noselect();
+
+        &:hover{
+            background-color: #4b4c4d;
+        }
+        &:active{
+            opacity: 0.5;
+
+        }
+    }
+    
+    #equals{
+        background-color: #254551;
+    }
+
+    #percent, #back, #divide, #multiply, #subtract, #add{
+        opacity: 0.7;
+    }
+
+    #ac{
+        background-color: #ac39399a;
+    }
+}
